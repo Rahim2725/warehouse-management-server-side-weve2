@@ -17,6 +17,7 @@ async function run() {
     try {
         await client.connect();
         const phoneCollections = client.db('phoneShop').collection('service');
+        const reviewCollections = client.db('phoneShop').collection('reviwes');
 
         app.get('/service', async (req, res) => {
             const services = await phoneCollections.find().toArray();
@@ -36,6 +37,18 @@ async function run() {
             // const query = { _id: ObjectId(id) };
             // const result = await phoneCollections.deleteOne(query);
             // res.send(result);
+        })
+
+
+        app.post('/service', async (req, res) => {
+            const service = req.body;
+            console.log(service);
+            res.send(service)
+        })
+
+        app.get('/review', async(req, res) => {
+            const review = await reviewCollections.find().toArray();
+            res.send(review);
         })
 
 
